@@ -1,0 +1,273 @@
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Remove Tap Highlight on Windows Phone IE -->
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+
+    <title>Gejala</title>
+
+
+    <!-- uikit -->
+    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.min.css" media="all">
+
+    <!-- flag icons -->
+    <link rel="stylesheet" href="assets/icons/flags/flags.min.css" media="all">
+
+    <!-- altair admin -->
+    <link rel="stylesheet" href="assets/css/main.min.css" media="all">
+
+    <!-- matchMedia polyfill for testing media queries in JS -->
+    <!--[if lte IE 9]>
+    <script type="text/javascript" src="bower_components/matchMedia/matchMedia.js"></script>
+    <script type="text/javascript" src="bower_components/matchMedia/matchMedia.addListener.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- main header -->
+<header id="header_main" style="padding-left: 10px;padding-right: 0px">
+    <div class="header_main_content">
+        <nav class="uk-navbar">
+            <div style="padding-top: 12px;color: white;font: 400 18px/1.42857143 Roboto,sans-serif;" >
+
+                <a href="mainmenu.html" class="user_action_image"><i class="material-icons md-24 md-light">arrow_back</i></a>
+
+                <img src="assets/img/tobacco.png" style="max-width: 25px;margin-left: 5px">
+                <b>Pilih Gejala Tanaman</b>
+
+            </div>
+
+
+        </nav>
+    </div>
+</header>
+<style>
+    .uk-accordion-title{
+        border-color:white;
+        border-width:1px;
+        border-radius: 0px;
+    }
+</style>
+<div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-1-1">
+        <div class="uk-accordion" data-uk-accordion="{showfirst:false}" id="list" style="background:#414D52;">
+        </div>
+    </div>
+</div>
+<div class="md-fab-wrapper">
+    <a class="md-fab md-fab-accent" id="hasil">
+        <i class="material-icons">exit_to_app</i>
+    </a>
+</div>
+<div id="snackbar">Pilih gejala dulu</div>
+
+<!-- google web fonts -->
+<script>
+    WebFontConfig = {
+        google: {
+            families: [
+                'Source+Code+Pro:400,700:latin',
+                'Roboto:400,300,500,700,400italic:latin'
+            ]
+        }
+    };
+    (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })();
+</script>
+
+<style>
+    #snackbar {
+        visibility: hidden; /* Hidden by default. Visible on click */
+        min-width: 200px; /* Set a default minimum width */
+        margin-left: -125px; /* Divide value of min-width by 2 */
+        background-color: #333; /* Black background color */
+        color: #fff; /* White text color */
+        text-align: center; /* Centered text */
+        border-radius: 2px; /* Rounded borders */
+        padding: 16px; /* Padding */
+        position: fixed; /* Sit on top of the screen */
+        z-index: 1; /* Add a z-index if needed */
+        left: 50%; /* Center the snackbar */
+        bottom: 30px; /* 30px from the bottom */
+    }
+
+    /* Show the snackbar when clicking on a button (class added with JavaScript) */
+    #snackbar.show {
+        visibility: visible; /* Show the snackbar */
+
+        /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    /* Animations to fade the snackbar in and out */
+    @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+    }
+
+    @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+    }
+
+    @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+    }
+</style>
+
+<!-- common functions -->
+<script src="assets/js/common.min.js"></script>
+<!-- uikit functions -->
+<script src="assets/js/uikit_custom.min.js"></script>
+<!-- altair common functions/helpers -->
+<script src="assets/js/altair_admin_common.min.js"></script>
+
+<script>
+
+</script>
+<script>
+
+    $(function() {
+        // enable hires images
+        altair_helpers.retina_images();
+        // fastClick (touch devices)
+        if(Modernizr.touch) {
+            FastClick.attach(document.body);
+        }
+    });
+</script>
+
+<script>
+
+
+
+    title_list = [
+            ["Daun", "Batang", "Bunga/Buah", "Akar","Hama Ulat","Hama Kepik","Hama Belalang","Hama Jangkrik dan Gangsir","Tanaman","Penyakit Fisiologis","Uji Organoleptik"],
+            ["Daun", "Batang","Hama Ulat","Hama Belalang","Hama Semut","Bibit"]
+    ];
+    content_list = [
+            [
+                    ["Daun tampak berlubang", "Daun berwarna keperak-perakan", "Daun tampak cacat/kotor","Daun menggulung/keriting","Terdapat bercak nekrotik pada daun","Warna daun kekuningan","Daun menjadi layu dan mati","Daun tampak bercak coklat kehitaman tidak beraturan, bercincin warna gelap terang",
+                        "Daun bagian bawah tampak bercak-bercak kecil berwarna putih dengan bagian pinggir coklat.","Bagian tengah bercak pada daun terdapat bintik-bintik hitam.","Daun kering (krosok) tampak bercak-bercak kecil berwarna hijau (green spot).","Daun tampak bercak-bercak berwarna coklat dengan lingkaran-lingkaran konsentris di pinggirnya",
+                        "Sisi atas daun tampak bercak-bercak tipis berwarna putih kelabu.","Bercak-bercak pada daun melebar berwarna putih bertepung.","Daun bawah yang menyentuh tanah membusuk","Permukaan daun halus","Bercak satu dan yang lain menyatu hingga ke tepi daun berwarna coklat. Ukuran bercak 1-2 cm.",
+                        "Daun muda tumbuh tidak normal menyempit dan memanjang seperti daun cemara.","Daun tampak klorosis pada bagian pinggir daun.","Daun pucuk menyempit berbentuk pita.","Daun tampak bercak-bercak tidak teratur berwarna hijau tua.","Adanya garis bergerigi pada daun","Daun berkerut-kerut mirip dengan kerupuk",
+                        "Tepi daun melengkung ke atas dan ke bawah.","Tulang daun menebal.","Daun tampak bercak-bercak kecil berwarna putih bentuknya memanjang dan membengkok, menyebar sehingga daun penuh dengan goresan","Daun-daun muda mengalami klorosis","Tambak bercak kering di seluruh bagian daun","Daun menjadi tebal",
+                        "Bagian tepi daun menggulung ke atas.","Tunas pucuk dan ketiak tampak mati","Daun menggulung ke bawah","Pupus daun warna kekuningan, bentuknya tidak normal dan arah titik tumbuh berubah menjadi miring.","Daun berkerut-kerut, permukaan daun tidak rata, berubah bentuk dan pertumubuhan daun terhambat.","Daun pucuk menjadi keriting"],
+                    ["Pangkal batang patah", "Batang menjadi bengkak", "Pangkal batang berwarna hitam menyeluruh dan membusuk hingga keseluruh daun","Apabila batang dibelah tampak empulur kering dan bersekat.","Apabila batang dibelah tampak xylem/berkas pembuluh berwarna cokelat kehitaman","Pangkal batang berwarna hitam separuh.","Pangkal batang berwarna hitam",
+                        "Bagian tengah batang membusuk dan berongga","Batang yang dipotong mengeluarkan lendir berwarna putih kotor"],
+                    ["Bunga/buah tampak berlubang"],
+                    ["Puru dan bintil-bintil pada akar membusuk", "Akar tanaman tidak berkembang normal"],
+                    ["Terdapat ulat/larva di atas/bawah daun","Terdapat sekelompok telur yang tertutup rambut warna cokelat di bawah permukaan daun.","Terdapat satu telur berwarna kuning di atas atau di bawah permukaan daun di setiap tanaman.","Terdapat ulat atau larva di atas bunga dan buah","Terdapat ulat di dalam batang dan daun."],
+                    ["Terdapat kepik berwarna hijau dan berukuran 1,5 cm di pucuk daun"],
+                    ["Terdapat belalang di daun dan bibit tanaman"],
+                    ["Terdapat jangkrik/gangsir dan telur jangkrik/gangsir di dalam tanah."],
+                    ["Tanaman layu sebelah dan mati","Tanaman menjadi kerdil","Terdapat bekas gigitan pada tanaman muda."],
+                    ["Kelebihan air di dalam tanah"],
+                    ["Daya bakar rendah dan bau tidak enak"]
+            ],
+            [
+                ["Daun tampak berlubang", "Daun berwarna keperak-perakan", "Daun tampak cacat/kotor","Daun menggulung/keriting","Terdapat bercak nekrotik pada daun","Warna daun kekuningan","Daun menjadi layu dan mati",
+                    "Daun bagian bawah tampak bercak-bercak kecil berwarna putih dengan bagian pinggir coklat.","Bagian tengah bercak pada daun terdapat bintik-bintik hitam.","Daun kering (krosok) tampak bercak-bercak kecil berwarna hijau (green spot).",
+                    "Daun tampak bercak-bercak tidak teratur berwarna hijau tua.","Permukaan daun mencembung/bentol","Adanya garis bergerigi pada daun"],
+                ["Pangkal batang berwarna hitam, berlekuk, dan ceking"],
+                ["Terdapat ulat/larva di atas/bawah daun","Terdapat sekelompok telur yang tertutup"],
+                ["Terdapat belalang di daun dan bibit tanaman"],
+                ["Benih pilen tidak tumbuh","Benih pilen menjadi serbuk dan berceceran","Tampak ada semut berwarna merah di sekitar polibag/bedengan","Terdapat semut di perangkap"],
+                ["Bibit atau tanaman layu","Bibit menjadi kerdil"]
+            ]
+    ];
+    hama_list=[
+            "Ulat Grayak","Ulat Pupus","Ulat Bungan dan Buah"
+    ];
+
+
+    MAKE_LIST = function(a, b) {
+        var text = "";
+        for (var i = 0, ln = a.length; i < ln; i++) {
+            text += '<h3 class="uk-accordion-title" style="margin: 0px;color:#FFEB3B">' + a[i] + '</h3>' +
+                    '<div class="uk-accordion-content" style="padding: 0px">';
+            for (var j = 0, ln2 = b[i].length; j < ln2; j++) {
+//                alert(b[i][0]);
+                text += '<div>' +
+                            '<div class="md-card center">' +
+                                '<div class="md-card-content">' +
+                                    '<div class="md-card-list-item-select">' +
+                                        '<div class="uk-grid"> '+
+                                            '<div class="uk-width-1-10">'+
+                                                '<input type="checkbox" id="gejala'+i+j+'"  data-md-icheck />' +
+                                            '</div>' +
+                                            '<div class="uk-width-9-10">'+
+                                                b[i][j] +
+                                            '</div>' +
+                                        '</div>'+
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+            }
+            text += '</div>';
+        }
+        var prosentase=0;
+        var jumlahgejala=0;
+        var hasil=false;
+
+        document.getElementById("hasil").onclick=function(){
+            for(var i = 0, ln = a.length; i < ln; i++){
+                for (var j = 0, ln2 = b[i].length; j < ln2; j++) {
+                    var checkoutGejala=document.getElementById('gejala'+i+j);
+                    if(checkoutGejala.checked){
+                        hasil=true;
+
+                        jumlahgejala+=1;
+
+                    }
+                }
+            }
+            if(hasil==true){
+                alert(jumlahgejala);
+               location.href="hasil.html";
+            }else{
+                var x = document.getElementById("snackbar")
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+
+
+        };
+        $("#list").html(text);
+    }
+    var x=window.location.search;
+    if(x=='?0'){
+        MAKE_LIST(title_list[0], content_list[0]);
+    }else{
+        MAKE_LIST(title_list[1], content_list[1]);
+    }
+
+
+
+
+
+</script>
+</body>
+</html>
