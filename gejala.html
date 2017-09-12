@@ -68,23 +68,7 @@
 
 <!-- google web fonts -->
 <script>
-    WebFontConfig = {
-        google: {
-            families: [
-                'Source+Code+Pro:400,700:latin',
-                'Roboto:400,300,500,700,400italic:latin'
-            ]
-        }
-    };
-    (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-    })();
+ 
 </script>
 
 <style>
@@ -145,17 +129,7 @@
 <script>
 
 </script>
-<script>
 
-    $(function() {
-        // enable hires images
-        altair_helpers.retina_images();
-        // fastClick (touch devices)
-        if(Modernizr.touch) {
-            FastClick.attach(document.body);
-        }
-    });
-</script>
 
 <script>
 
@@ -216,7 +190,7 @@
                                             '<div class="uk-width-1-10">'+
                                                 '<input type="checkbox" id="gejala'+i+j+'"  data-md-icheck />' +
                                             '</div>' +
-                                            '<div class="uk-width-9-10">'+
+                                            '<div class="uk-width-9-10" id="ini'+i+j+'">'+
                                                 b[i][j] +
                                             '</div>' +
                                         '</div>'+
@@ -230,22 +204,27 @@
         var prosentase=0;
         var jumlahgejala=0;
         var hasil=false;
+        var gejalapenyakit= new Array();
 
         document.getElementById("hasil").onclick=function(){
             for(var i = 0, ln = a.length; i < ln; i++){
                 for (var j = 0, ln2 = b[i].length; j < ln2; j++) {
                     var checkoutGejala=document.getElementById('gejala'+i+j);
+
                     if(checkoutGejala.checked){
                         hasil=true;
-
+                         gejalapenyakit[jumlahgejala]=($('#ini'+i+j).html());
                         jumlahgejala+=1;
+                       
+                        
 
                     }
                 }
             }
             if(hasil==true){
-                alert(jumlahgejala);
+                alert('Jumlah Gejala : '+jumlahgejala+' | '+gejalapenyakit);
                location.href="hasil.html";
+                // location.href="hasil.html?j="+jumlahgejala+"&g="+gejalapenyakit+"";
             }else{
                 var x = document.getElementById("snackbar")
                 x.className = "show";
